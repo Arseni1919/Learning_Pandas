@@ -207,7 +207,9 @@ These data access methods are much more readable:
 >>> colors.iloc[1]
 'purple'
 ```
-![](pic1.png)
+<p align="center">
+    <img src="pic1.png" alt="drawing" width="400"/>
+</p>
 
 ```python
 ```
