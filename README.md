@@ -2,8 +2,17 @@
 
 ## [Pandas Cheat Sheet](pandas_cheat_sheet.pdf)
 
-## [All The Examples](scripts/examples.ipynb)
 
+## First Steps
+
+```python
+nba = pd.read_csv("../data/nba_all_elo.csv")
+type(nba)
+```
+
+
+
+## [Some Pandas Examples](scripts/examples.ipynb)
 
 ___
 
