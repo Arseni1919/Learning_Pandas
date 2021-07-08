@@ -137,10 +137,27 @@ Tokyo         6500             8.0
 Toronto       8000             NaN
 ```
 
+You can also refer to the 2 dimensions of a DataFrame as axes:
 ```python
+
+city_data.axes
+[Index(['Amsterdam', 'Tokyo', 'Toronto'], dtype='object'),
+ Index(['revenue', 'employee_count'], dtype='object')]
+city_data.axes[0]
+ Index(['Amsterdam', 'Tokyo', 'Toronto'], dtype='object')
+city_data.axes[1]
+Index(['revenue', 'employee_count'], dtype='object')
 ```
 
+A DataFrame is also a dictionary-like data structure, so it also supports .keys() and the in keyword.
+However, for a DataFrame these don’t relate to the index, but to the columns:
 ```python
+>>> city_data.keys()
+Index(['revenue', 'employee_count'], dtype='object')
+>>> "Amsterdam" in city_data
+False
+>>> "revenue" in city_data
+True
 ```
 
 ```python
