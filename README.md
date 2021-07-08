@@ -207,7 +207,7 @@ These data access methods are much more readable:
 >>> colors.iloc[1]
 'purple'
 ```
-![](data/pic1.png)
+![](pic1.png)
 
 ```python
 ```
