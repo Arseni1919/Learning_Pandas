@@ -160,7 +160,19 @@ False
 True
 ```
 
+## Accessing Series Elements
+
+Recall that a Series has two indices:
+
+1. A positional or implicit index, which is always a RangeIndex
+1. A label or explicit index, which can contain any hashable objects
+
+You can conveniently access the values in a Series with both the label and positional indices:
 ```python
+>>> city_revenues["Toronto"]
+8000
+>>> city_revenues[1]
+8000
 ```
 
 ```python
