@@ -175,8 +175,39 @@ You can conveniently access the values in a Series with both the label and posit
 8000
 ```
 
+
+## Using .loc and .iloc
+The indexing operator ([]) is convenient, but there’s a caveat. What if the labels are also numbers?
+Say you have to work with a Series object like this:
 ```python
+>>> colors = pd.Series(
+...     ["red", "purple", "blue", "green", "yellow"],
+...     index=[1, 2, 3, 5, 8]
+... )
+>>> colors
+1       red
+2    purple
+3      blue
+5     green
+8    yellow
+dtype: object
 ```
+What will colors[1] return? For a positional index, colors[1] is "purple".
+However, if you go by the label index, then colors[1] is referring to "red".
+
+The good news is, you don’t have to figure it out!
+Instead, to avoid confusion, the Pandas Python library provides two data access methods:
+
+1. .loc refers to the label index.
+1. .iloc refers to the positional index.
+These data access methods are much more readable:
+```python
+>>> colors.loc[1]
+'red'
+>>> colors.iloc[1]
+'purple'
+```
+![](data/pic1.png)
 
 ```python
 ```
