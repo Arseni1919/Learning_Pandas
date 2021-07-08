@@ -177,7 +177,7 @@ You can conveniently access the values in a Series with both the label and posit
 
 
 ## Using .loc and .iloc
-The indexing operator ([]) is convenient, but there’s a caveat. What if the labels are also numbers?
+The indexing operator (`[]`) is convenient, but there’s a caveat. What if the labels are also numbers?
 Say you have to work with a Series object like this:
 ```python
 >>> colors = pd.Series(
