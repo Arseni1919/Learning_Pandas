@@ -1,5 +1,10 @@
 # Learning Pandas
 
+> Do you have a large dataset that’s full of interesting insights, but you’re not sure where to start exploring it?
+> Has your boss asked you to generate some statistics from it, but they’re not so easy to extract?
+> These are precisely the use cases where Pandas and Python can help you! With these tools,
+> you’ll be able to slice a large dataset down into manageable parts and glean insight from that information.
+
 ## [Pandas Cheat Sheet](pandas_cheat_sheet.pdf)
 
 
@@ -414,51 +419,41 @@ By default, it creates a line plot. Visualize how many points the Knicks scored 
 ```python
 >>> nba[nba["fran_id"] == "Knicks"].groupby("year_id")["pts"].sum().plot()
 >>> nba["fran_id"].value_counts().head(10).plot(kind="bar")
+In [8]: df.plot(x="Rank", y=["P25th", "Median", "P75th"])
+Out[8]: <AxesSubplot:xlabel='Rank'>
 ```
-
+<p align="center">
+    <img src="pic2.png" alt="drawing" width="400"/>
+</p>
 ```python
+In [14]: median_column.plot(kind="hist")
+Out[14]: <AxesSubplot:ylabel='Frequency'>
 ```
-
+<p align="center">
+    <img src="pic3.png" alt="drawing" width="400"/>
+</p>
 ```python
+In [19]: df.plot(x="Median", y="Unemployment_rate", kind="scatter")
+Out[19]: <AxesSubplot:xlabel='Median', ylabel='Unemployment_rate'>
 ```
-
+<p align="center">
+    <img src="pic4.png" alt="drawing" width="400"/>
+</p>
 ```python
+In [23]: small_cat_totals = cat_totals[cat_totals < 100_000]
+In [24]: big_cat_totals = cat_totals[cat_totals > 100_000]
+In [25]: # Adding a new item "Other" with the sum of the small categories
+In [26]: small_sums = pd.Series([small_cat_totals.sum()], index=["Other"])
+In [27]: big_cat_totals = big_cat_totals.append(small_sums)
+In [28]: big_cat_totals.plot(kind="pie", label="")
+Out[28]: <AxesSubplot:>
 ```
+<p align="center">
+    <img src="pic5.png" alt="drawing" width="400"/>
+</p>
 
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
-
-
+<!-- ```python -->
+<!-- ``` -->
 
 ## [Some Pandas Examples](scripts/examples.ipynb)
 
@@ -468,3 +463,4 @@ ___
 
 - [Pandas Python Explore Dataset - Real Python](https://realpython.com/pandas-python-explore-dataset)
 - [Pandas Python Visualization - Real Python](https://realpython.com/pandas-plot-python/)
+- [Pandas - Docs](https://pandas.pydata.org/docs/reference/index.html)
