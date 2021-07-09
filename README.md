@@ -8,7 +8,7 @@
 ___
 
 ## Contents
-- [First Steps](# First Steps)
+- [First Steps](#First-Steps)
 
 ___
 
