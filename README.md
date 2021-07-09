@@ -9,6 +9,19 @@ ___
 
 ## Contents
 - [First Steps](#First-Steps)
+- [Displaying Data Types](#displaying-data-types)
+- [Getting to Know Pandas’ Data Structures](#getting-to-know-pandas-data-structures)
+- [Understanding DataFrame Objects](#understanding-dataframe-objects)
+- [Accessing Series Elements](#accessing-series-elements)
+- [Using .loc and .iloc](#using-loc-and-iloc)
+- [Querying Your Dataset](#querying-your-dataset)
+- [Grouping and Aggregating Your Data](#grouping-and-aggregating-your-data)
+- [Manipulating Columns](#manipulating-columns)
+- [Specifying Data Types](#specifying-data-types)
+- [Cleaning Data](#cleaning-data)
+- [Combining Multiple Datasets](#combining-multiple-datasets)
+- [Visualizing Your Pandas DataFrame](#visualizing-your-pandas-dataframe)
+- [Credits](#credits)
 
 ___
 
