@@ -425,6 +425,7 @@ Out[8]: <AxesSubplot:xlabel='Rank'>
 <p align="center">
     <img src="pic2.png" alt="drawing" width="400"/>
 </p>
+
 ```python
 In [14]: median_column.plot(kind="hist")
 Out[14]: <AxesSubplot:ylabel='Frequency'>
@@ -432,6 +433,7 @@ Out[14]: <AxesSubplot:ylabel='Frequency'>
 <p align="center">
     <img src="pic3.png" alt="drawing" width="400"/>
 </p>
+
 ```python
 In [19]: df.plot(x="Median", y="Unemployment_rate", kind="scatter")
 Out[19]: <AxesSubplot:xlabel='Median', ylabel='Unemployment_rate'>
@@ -439,6 +441,7 @@ Out[19]: <AxesSubplot:xlabel='Median', ylabel='Unemployment_rate'>
 <p align="center">
     <img src="pic4.png" alt="drawing" width="400"/>
 </p>
+
 ```python
 In [23]: small_cat_totals = cat_totals[cat_totals < 100_000]
 In [24]: big_cat_totals = cat_totals[cat_totals > 100_000]
