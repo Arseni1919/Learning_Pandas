@@ -211,13 +211,68 @@ These data access methods are much more readable:
     <img src="pic1.png" alt="drawing" width="400"/>
 </p>
 
+## Querying Your Dataset
+You’ve seen how to access subsets of a huge dataset based on its indices.
+Now, you’ll select rows based on the values in your dataset’s columns to query your data.
 ```python
+>>> current_decade = nba[nba["year_id"] > 2010]
+>>> current_decade.shape
+(12658, 24)
+>>> games_with_notes = nba[nba["notes"].notnull()]  # or .notna()
+>>> games_with_notes.shape
+(5424, 24)
+>>> ers = nba[nba["fran_id"].str.endswith("ers")]
+>>> ers.shape
+(27797, 24)
+>>> nba[
+...     (nba["_iscopy"] == 0) &
+...     (nba["pts"] > 100) &
+...     (nba["opp_pts"] > 100) &
+...     (nba["team_id"] == "BLB")
+... ]
 ```
 
+## Grouping and Aggregating Your Data
+You may also want to learn other features of your dataset, like the sum, mean, or average value of a group of elements.
+Luckily, the Pandas Python library offers grouping and aggregation functions to help you accomplish this task.
 ```python
+>>> city_revenues.sum()
+18700
+>>> city_revenues.max()  # There are other methods you can use, like .min() and .mean().
+8000
+>>> nba.groupby("fran_id", sort=False)["pts"].sum()
+fran_id
+Huskies           3995
+Knicks          582497
+Stags            20398
+Falcons           3797
+Capitols         22387
+...
+>>> nba[
+...     (nba["fran_id"] == "Spurs") &
+...     (nba["year_id"] > 2010)
+... ].groupby(["year_id", "game_result"])["game_id"].count()
+year_id  game_result
+2011     L              25
+         W              63
+2012     L              20
+         W              60
+2013     L              30
+         W              73
+2014     L              27
+         W              78
+2015     L              31
+         W              58
+Name: game_id, dtype: int64
 ```
-
+> Remember, a column of a DataFrame is actually a Series object.
+> For this reason, you can use these same functions on the columns of nba:
 ```python
+>>> points = nba["pts"]
+>>> type(points)
+<class 'pandas.core.series.Series'>
+>>> points.sum()
+12976235
 ```
 
 ```python
