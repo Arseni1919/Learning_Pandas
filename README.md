@@ -402,10 +402,18 @@ Toronto       8000             NaN   Canada        0
 Barcelona     3400             2.0    Spain        0
 ```
 
+## Visualizing Your Pandas DataFrame
+
+In Jupiter Notebook make:
 ```python
+>>> %matplotlib inline
 ```
 
+Both Series and DataFrame objects have a `.plot()` method, which is a wrapper around `matplotlib.pyplot.plot()`.
+By default, it creates a line plot. Visualize how many points the Knicks scored throughout the seasons:
 ```python
+>>> nba[nba["fran_id"] == "Knicks"].groupby("year_id")["pts"].sum().plot()
+>>> nba["fran_id"].value_counts().head(10).plot(kind="bar")
 ```
 
 ```python
