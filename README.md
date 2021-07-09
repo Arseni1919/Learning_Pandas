@@ -198,8 +198,8 @@ However, if you go by the label index, then colors[1] is referring to "red".
 The good news is, you don’t have to figure it out!
 Instead, to avoid confusion, the Pandas Python library provides two data access methods:
 
-1. .loc refers to the label index.
-1. .iloc refers to the positional index.
+1. `.loc` refers to the label index.
+1. `.iloc` refers to the positional index.
 These data access methods are much more readable:
 ```python
 >>> colors.loc[1]
