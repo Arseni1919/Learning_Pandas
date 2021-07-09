@@ -8,7 +8,7 @@
 ___
 
 ## Contents
-- [Pandas Cheat Sheet](#Pandas Cheat Sheet)
+- [First Steps](# First Steps)
 
 ___
 
