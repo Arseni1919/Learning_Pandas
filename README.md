@@ -275,31 +275,131 @@ Name: game_id, dtype: int64
 12976235
 ```
 
+## Manipulating Columns
+
+Create a copy of your original DataFrame to work with:
 ```python
+>>> df = nba.copy()
+>>> df.shape
+(126314, 24)
+```
+You can define new columns based on the existing ones:
+```python
+>>> df["difference"] = df.pts - df.opp_pts
+>>> df.shape
+(126314, 25)
+>>> df["difference"].max()
+68
 ```
 
+You can also rename the columns of your dataset. It seems that "game_result" and "game_location" are too verbose,
+so go ahead and rename them now:
 ```python
+>>> renamed_df = df.rename(
+...     columns={"game_result": "result", "game_location": "location"}
+... )
+>>> renamed_df.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 126314 entries, 0 to 126313
+Data columns (total 25 columns):
+ #   Column       Non-Null Count   Dtype
+---  ------       --------------   -----
+ 0   gameorder    126314 non-null  int64
+ ...
+ 19  location     126314 non-null  object
+ 20  result       126314 non-null  object
+ 21  forecast     126314 non-null  float64
+ 22  notes        5424 non-null    object
+ 23  date_played  126314 non-null  datetime64[ns]
+ 24  difference   126314 non-null  int64
+dtypes: datetime64[ns](1), float64(6), int64(8), object(10)
+memory usage: 24.1+ MB
 ```
 
+## Specifying Data Types
+
+You would probably not use a varchar type, but rather an enum.
+Pandas provides the categorical data type for the same purpose:
 ```python
+>>> df["game_location"] = pd.Categorical(df["game_location"])
+>>> df["game_location"].dtype
+CategoricalDtype(categories=['A', 'H', 'N'], ordered=False)
+```
+**categorical data** has a few advantages over unstructured text.
+When you specify the categorical data type, you make validation easier and save a ton of memory,
+as Pandas will only use the unique values internally.
+The higher the ratio of total values to unique values, the more space savings you’ll get.
+
+## Cleaning Data
+
+Sometimes, the easiest way to deal with records containing missing values is to ignore them.
+You can remove all the rows with missing values using `.dropna()`:
+```python
+>>> rows_without_missing_data = nba.dropna()
+>>> rows_without_missing_data.shape
+(5424, 24)
 ```
 
+You can also drop problematic columns if they’re not relevant for your analysis.
+To do this, use `.dropna()` again and provide the axis=1 parameter:
 ```python
+>>> data_without_missing_columns = nba.dropna(axis=1)
+>>> data_without_missing_columns.shape
+(126314, 23)
 ```
 
+If there’s a meaningful default value for your use case, then you can also replace the missing values with that:
 ```python
+>>> data_with_default_notes = nba.copy()
+>>> data_with_default_notes["notes"].fillna(
+...     value="no notes at all",
+...     inplace=True
+... )
+>>> data_with_default_notes["notes"].describe()
+count              126314
+unique                232
+top       no notes at all
+...
 ```
 
-```python
-```
+## Combining Multiple Datasets
 
 ```python
+>>> further_city_data = pd.DataFrame(
+...     {"revenue": [7000, 3400], "employee_count":[2, 2]},
+...     index=["New York", "Barcelona"]
+... )
+>>> all_city_data = pd.concat([city_data, further_city_data], sort=False)
+>>> all_city_data
+Amsterdam   4200    5.0
+Tokyo       6500    8.0
+Toronto     8000    NaN
+New York    7000    2.0
+Barcelona   3400    2.0
 ```
-
+By default, `concat()` combines along `axis=0`. In other words, it appends rows.
+You can also use it to append columns by supplying the parameter `axis=1`:
 ```python
-```
-
-```python
+>>> city_countries = pd.DataFrame({
+...     "country": ["Holland", "Japan", "Holland", "Canada", "Spain"],
+...     "capital": [1, 1, 0, 0, 0]},
+...     index=["Amsterdam", "Tokyo", "Rotterdam", "Toronto", "Barcelona"]
+... )
+>>> cities = pd.concat([all_city_data, city_countries], axis=1, sort=False)
+>>> cities
+           revenue  employee_count  country  capital
+Amsterdam   4200.0             5.0  Holland      1.0
+Tokyo       6500.0             8.0    Japan      1.0
+Toronto     8000.0             NaN   Canada      0.0
+New York    7000.0             2.0      NaN      NaN
+Barcelona   3400.0             2.0    Spain      0.0
+Rotterdam      NaN             NaN  Holland      0.0
+>>> pd.concat([all_city_data, city_countries], axis=1, join="inner")
+           revenue  employee_count  country  capital
+Amsterdam     4200             5.0  Holland        1
+Tokyo         6500             8.0    Japan        1
+Toronto       8000             NaN   Canada        0
+Barcelona     3400             2.0    Spain        0
 ```
 
 ```python
