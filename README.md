@@ -5,6 +5,13 @@
 > These are precisely the use cases where Pandas and Python can help you! With these tools,
 > you’ll be able to slice a large dataset down into manageable parts and glean insight from that information.
 
+___
+
+## Contents
+- [Pandas Cheat Sheet](#Pandas Cheat Sheet)
+
+___
+
 ## [Pandas Cheat Sheet](pandas_cheat_sheet.pdf)
 
 
